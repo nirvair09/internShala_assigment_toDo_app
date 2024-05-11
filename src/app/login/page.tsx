@@ -45,30 +45,6 @@ export default function LoginPage() {
 		}
 	};
 
-	const guestLogin = async () => {
-		setValues({email: "Jayeshgadhok@gmail.com", password: "Jayesh@1996"});
-		try {
-			setGuestLoading(true);
-			const response = await axios.post("/api/users/login", {
-				email: "Jayeshgadhok@gmail.com",
-				password: "Jayesh@1996",
-			});
-			const responseData = response.data;
-			if (!responseData.error) {
-				router.push("/");
-				toast({title: responseData.message});
-			}
-		} catch (error: any) {
-			const errorMessage =
-				error.response?.data?.error || "An error occurred during guest login.";
-			toast({title: errorMessage});
-			console.error("An error occurred during guest login:", error);
-		} finally {
-			setGuestLoading(false);
-			resetForm();
-		}
-	};
-
 	const {
 		handleSubmit,
 		values,
@@ -180,7 +156,7 @@ export default function LoginPage() {
 							</div>
 						</div>
 
-						<div className="grid grid-cols-2 gap-3">
+						<div >
 							<button
 								type="submit"
 								disabled={!isValid || isSubmitting}
@@ -193,21 +169,6 @@ export default function LoginPage() {
 									</>
 								) : (
 									"Log in"
-								)}
-							</button>
-							<button
-								onClick={guestLogin}
-								type="button"
-								disabled={!isValid || isSubmitting}
-								className="text-white cursor-pointer flex items-center gap-2 w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-							>
-								{isSubmitting && guestLoading ? (
-									<>
-										Logging in...
-										<BiLoaderAlt className="text-lg animate-spin" />
-									</>
-								) : (
-									"Guest login"
 								)}
 							</button>
 						</div>
