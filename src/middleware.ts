@@ -1,19 +1,13 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-// This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
-  // Extracting url paths
   const path = request.nextUrl.pathname;
-
-  // Define paths that are considered public
   const publicPaths = ["/login", "/signup"];
-
-  // Check if the current path is a public path
-  const isPublicPath = publicPaths.includes(path);
-
-  // Extract the token from user cookies
   const token = request.cookies.get("token")?.value || "";
+
+  // Check if the current path is public
+  const isPublicPath = publicPaths.includes(path);
 
   // Redirect logic based on authentication status and path
   if (isPublicPath && token) {
@@ -23,13 +17,15 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.nextUrl));
   }
 
-  // Allow access to /usertask if token is present
+  // If the path is /usertask and there's no token, redirect to login
   if (path === "/usertask" && !token) {
     return NextResponse.redirect(new URL("/login", request.nextUrl));
   }
+
+  // Allow access to other paths
+  return null;
 }
 
-// See "Matching Paths" below to learn more
 export const config = {
   matcher: ["/", "/login", "/signup", "/usertask"],
 };
