@@ -23,7 +23,7 @@ const AddTodo = (props: Props) => {
 	const onTaskAdded = async (values: any) => {
 		try {
 			setIsLoading(true);
-			const response = await axios.post("/api/usertask", values);
+			const response = await axios.post("/api/usertask", values.todo);
 			console.log(response);
 			if (response.data) {
 				toast({title: "Task added successfully"});
