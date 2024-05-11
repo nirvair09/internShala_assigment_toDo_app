@@ -20,10 +20,10 @@ const AddTodo = (props: Props) => {
 	const {handleAddTodo, isLoading, setIsLoading} = useTodo();
 
 	//fix tost message and data not saved in server
-	const onTaskAdded = async () => {
+	const onTaskAdded = async (values: any) => {
 		try {
 			setIsLoading(true);
-			const response = await axios.post("/api/usertask", values.todo);
+			const response = await axios.post("/api/usertask", values);
 			console.log(response);
 			if (response.data) {
 				toast({title: "Task added successfully"});
