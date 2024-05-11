@@ -102,7 +102,7 @@ export default function LoginPage() {
 									value={values.email}
 									onChange={handleChange}
 									onBlur={() => handleTouched("email")}
-									placeholder="rahul@xyz.com"
+									placeholder="email"
 									autoComplete="email"
 									required
 									className={`w-full rounded-md border-5 bg-transparent/5 placeholder:text-black/30 border-gray-600 py-1.5 text-black shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6 ${
@@ -142,7 +142,7 @@ export default function LoginPage() {
 									value={values.password}
 									onChange={handleChange}
 									onBlur={() => handleTouched("password")}
-									placeholder="rahul@1999"
+									placeholder="password"
 									required
 									className={`w-full rounded-md border-5 bg-transparent/5 placeholder:text-black/30 border-gray-600 py-1.5 text-black shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6 ${
 										touched.password && errors.password
